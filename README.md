@@ -16,3 +16,4 @@ Horrible Documentatino: read what is there, do not complain.
 I will keep developing this until my expectations are met. And then I will fix everything and finally provide an editor.
 
 If your name is C0Florent, vaxerski, or Declan Connoly, GO FUCK YOURSELF!
+And last of all, FUCK YOU vaxerski, YOU CHECKED ONE SOURCE, AND IT WAS WRONG. EVERY OTHER SOURCE SAID IT IS NOT J'REMUE IT IS JE REMUE. ASK ANYONE FRENCH. I ASKED MY LOCAL FRENCH BAKER, HE AND HIS WIFE SAID JE REMUE. KILL YOURSELF.
