@@ -4,9 +4,9 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
-#include <format>
 #include <concepts>
 #include <functional>
+#include <cmath>
 
 namespace SF::Engine
 {
@@ -222,19 +222,23 @@ namespace SF::Engine
         [[nodiscard]] std::string ToString() const
         {
             auto abs_us = std::abs(m_value.count());
+            std::ostringstream oss;
+            oss << std::fixed << std::setprecision(3);
 
             if (abs_us >= 1'000'000) // >= 1 second
             {
-                return std::format("{:.3f}s", AsSeconds());
+                oss << AsSeconds() << "s";
             }
             else if (abs_us >= 1'000) // >= 1 millisecond
             {
-                return std::format("{:.3f}ms", AsMilliseconds());
+                oss << AsMilliseconds() << "ms";
             }
             else // < 1 millisecond
             {
-                return std::format("{}μs", m_value.count());
+                oss << m_value.count() << "μs";
             }
+
+            return oss.str();
         }
 
         /**
@@ -301,19 +305,11 @@ namespace SF::Engine
     class ElapsedTime
     {
     public:
-        /**
-         * @brief Construct with an interval
-         * @param interval The time interval to measure (negative = no interval)
-         */
         explicit ElapsedTime(const Time &interval = Time::Seconds(-1)) noexcept
             : m_startTime(Time::Now()), m_interval(interval)
         {
         }
 
-        /**
-         * @brief Get number of complete intervals that have elapsed
-         * @return Number of intervals (resets start time if > 0)
-         */
         uint32_t GetElapsed() noexcept
         {
             auto now = Time::Now();
@@ -325,50 +321,24 @@ namespace SF::Engine
             return elapsed;
         }
 
-        /**
-         * @brief Get the time elapsed since start
-         * @return Elapsed time
-         */
         [[nodiscard]] Time GetElapsedTime() const noexcept
         {
             return Time::Now() - m_startTime;
         }
 
-        /**
-         * @brief Check if at least one interval has passed
-         * @return True if an interval has passed (auto-resets)
-         */
         bool HasElapsed() noexcept
         {
             return GetElapsed() > 0;
         }
 
-        /**
-         * @brief Reset the start time to now
-         */
         void Reset() noexcept
         {
             m_startTime = Time::Now();
         }
 
-        /**
-         * @brief Get the start time
-         */
         [[nodiscard]] const Time &GetStartTime() const noexcept { return m_startTime; }
-
-        /**
-         * @brief Set the start time
-         */
         void SetStartTime(const Time &startTime) noexcept { m_startTime = startTime; }
-
-        /**
-         * @brief Get the interval
-         */
         [[nodiscard]] const Time &GetInterval() const noexcept { return m_interval; }
-
-        /**
-         * @brief Set the interval
-         */
         void SetInterval(const Time &interval) noexcept { m_interval = interval; }
 
     private:
@@ -384,19 +354,11 @@ namespace SF::Engine
     public:
         using CallbackFn = std::function<void(Time)>;
 
-        /**
-         * @brief Start timing and call callback on destruction
-         * @param callback Function to call with elapsed time
-         */
         explicit ScopedTimer(CallbackFn callback) noexcept
             : m_callback(std::move(callback)), m_start(Time::Now())
         {
         }
 
-        /**
-         * @brief Start timing and store result in reference
-         * @param result Reference to store elapsed time
-         */
         explicit ScopedTimer(Time &result) noexcept
             : m_result(&result), m_start(Time::Now())
         {
@@ -413,7 +375,6 @@ namespace SF::Engine
                 *m_result = elapsed;
         }
 
-        // Non-copyable, non-movable
         ScopedTimer(const ScopedTimer &) = delete;
         ScopedTimer &operator=(const ScopedTimer &) = delete;
         ScopedTimer(ScopedTimer &&) = delete;
@@ -433,9 +394,6 @@ namespace SF::Engine
     public:
         Stopwatch() = default;
 
-        /**
-         * @brief Start or resume the stopwatch
-         */
         void Start() noexcept
         {
             if (!m_running)
@@ -445,9 +403,6 @@ namespace SF::Engine
             }
         }
 
-        /**
-         * @brief Stop/pause the stopwatch
-         */
         void Stop() noexcept
         {
             if (m_running)
@@ -457,9 +412,6 @@ namespace SF::Engine
             }
         }
 
-        /**
-         * @brief Reset the stopwatch to zero
-         */
         void Reset() noexcept
         {
             m_running = false;
@@ -467,19 +419,12 @@ namespace SF::Engine
             m_startTime = Time::Seconds(0);
         }
 
-        /**
-         * @brief Restart the stopwatch from zero
-         */
         void Restart() noexcept
         {
             Reset();
             Start();
         }
 
-        /**
-         * @brief Get elapsed time (includes current session if running)
-         * @return Total elapsed time
-         */
         [[nodiscard]] Time GetElapsed() const noexcept
         {
             if (m_running)
@@ -487,9 +432,6 @@ namespace SF::Engine
             return m_elapsed;
         }
 
-        /**
-         * @brief Check if the stopwatch is running
-         */
         [[nodiscard]] bool IsRunning() const noexcept { return m_running; }
 
     private:
@@ -509,9 +451,6 @@ namespace SF::Engine
         {
         }
 
-        /**
-         * @brief Update the counter (call once per frame)
-         */
         void Update() noexcept
         {
             m_frameCount++;
@@ -526,14 +465,8 @@ namespace SF::Engine
             }
         }
 
-        /**
-         * @brief Get the current FPS
-         */
         [[nodiscard]] double GetFPS() const noexcept { return m_fps; }
 
-        /**
-         * @brief Get the average frame time in milliseconds
-         */
         [[nodiscard]] double GetFrameTime() const noexcept
         {
             return m_fps > 0.0 ? 1000.0 / m_fps : 0.0;
@@ -573,31 +506,20 @@ namespace SF::Engine
 
         static_assert(std::chrono::is_clock_v<ClockType>, "ClockType must satisfy the Clock concept");
 
-        /**
-         * @brief Callback type for rate change notifications
-         */
         using RateCallback = std::function<void(uint32_t rate)>;
 
-        /**
-         * @brief Update the counter with current time
-         * @param time Current time point
-         * @return Current rate if a second boundary was crossed, std::nullopt otherwise
-         */
         std::optional<uint32_t> Update(const time_point &time = clock::now())
         {
             ++valueTemp_;
 
-            // Check if we've crossed a second boundary
             const auto currentSeconds = std::chrono::floor<std::chrono::seconds>(time);
             const auto lastSeconds = std::chrono::floor<std::chrono::seconds>(valueTime_);
 
             if (currentSeconds > lastSeconds)
             {
-                // Store the rate for the completed second
                 value_ = std::exchange(valueTemp_, 0);
                 valueTime_ = time;
 
-                // Notify callback if set
                 if (rateCallback_)
                 {
                     rateCallback_(value_);
@@ -610,64 +532,35 @@ namespace SF::Engine
             return std::nullopt;
         }
 
-        /**
-         * @brief Update the counter with Time object
-         * @param time Time object from Time class
-         * @return Current rate if a second boundary was crossed, std::nullopt otherwise
-         */
         std::optional<uint32_t> Update(const Time &time)
         {
-            // Convert Time to chrono duration (assuming Time has AsSeconds() or similar)
             const auto seconds = std::chrono::duration_cast<duration>(
                 std::chrono::duration<double>(time.AsSeconds()));
             return Update(time_point{} + seconds);
         }
 
-        /**
-         * @brief Get the current rate (per second)
-         * @return Rate in occurrences per second
-         */
         [[nodiscard]] constexpr uint32_t GetRate() const noexcept
         {
             return value_;
         }
 
-        /**
-         * @brief Get the temporary count for the current partial second
-         * @return Current partial count
-         */
         [[nodiscard]] constexpr uint32_t GetCurrentPartialCount() const noexcept
         {
             return valueTemp_;
         }
 
-        /**
-         * @brief Get the time elapsed in the current second
-         * @param currentTime Current time point
-         * @return Duration elapsed in current second
-         */
         [[nodiscard]] duration GetElapsedInCurrentSecond(const time_point &currentTime = clock::now()) const
         {
             const auto currentSeconds = std::chrono::floor<std::chrono::seconds>(currentTime);
             return currentTime - currentSeconds;
         }
 
-        /**
-         * @brief Get the time remaining in the current second
-         * @param currentTime Current time point
-         * @return Duration remaining in current second
-         */
         [[nodiscard]] duration GetRemainingInCurrentSecond(const time_point &currentTime = clock::now()) const
         {
             constexpr auto oneSecond = std::chrono::seconds(1);
             return oneSecond - GetElapsedInCurrentSecond(currentTime);
         }
 
-        /**
-         * @brief Estimate the projected rate for the current second
-         * @param currentTime Current time point
-         * @return Estimated rate if current pace continues
-         */
         [[nodiscard]] double GetProjectedRate(const time_point &currentTime = clock::now()) const
         {
             if (valueTemp_ == 0)
@@ -681,9 +574,6 @@ namespace SF::Engine
             return static_cast<double>(valueTemp_) / secondsElapsed;
         }
 
-        /**
-         * @brief Reset the counter to zero
-         */
         void Reset() noexcept
         {
             value_ = 0;
@@ -691,26 +581,16 @@ namespace SF::Engine
             valueTime_ = time_point{};
         }
 
-        /**
-         * @brief Set a callback to be notified when rate changes
-         * @param callback Function to call with new rate
-         */
         void SetRateCallback(RateCallback callback)
         {
             rateCallback_ = std::move(callback);
         }
 
-        /**
-         * @brief Operator to get the current rate
-         */
         [[nodiscard]] constexpr operator uint32_t() const noexcept
         {
             return value_;
         }
 
-        /**
-         * @brief Create a scoped updater that automatically updates on destruction
-         */
         [[nodiscard]] auto MakeScopedUpdater()
         {
             return ScopedUpdater(*this);
@@ -721,9 +601,6 @@ namespace SF::Engine
         time_point valueTime_;
         RateCallback rateCallback_;
 
-        /**
-         * @brief RAII helper for scoped updates
-         */
         class ScopedUpdater
         {
         public:
@@ -734,11 +611,8 @@ namespace SF::Engine
                 counter_.Update();
             }
 
-            // Non-copyable
             ScopedUpdater(const ScopedUpdater &) = delete;
             ScopedUpdater &operator=(const ScopedUpdater &) = delete;
-
-            // Movable
             ScopedUpdater(ScopedUpdater &&) noexcept = default;
             ScopedUpdater &operator=(ScopedUpdater &&) noexcept = default;
 
@@ -747,9 +621,6 @@ namespace SF::Engine
         };
     };
 
-    /**
-     * @brief Rate tracker with statistics
-     */
     template <typename ClockType = std::chrono::steady_clock>
     class RateTracker : public UpdatesPerSecond<ClockType>
     {
@@ -801,7 +672,6 @@ namespace SF::Engine
                 stats_.minRate = std::min(stats_.minRate, newRate);
                 stats_.maxRate = std::max(stats_.maxRate, newRate);
 
-                // Running average
                 const double total = stats_.averageRate * stats_.sampleCount + newRate;
                 stats_.averageRate = total / (stats_.sampleCount + 1);
             }
@@ -812,7 +682,6 @@ namespace SF::Engine
         Statistics stats_;
     };
 
-    // Deduction guide (C++17+)
     template <typename ClockType>
     UpdatesPerSecond(ClockType) -> UpdatesPerSecond<ClockType>;
 
