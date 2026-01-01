@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.0)
 
 # --------------------------------------------------
 # Project declaration
@@ -113,3 +113,4 @@ file(APPEND "${VERSION_HEADER}" "constexpr uint8_t Engine_VERSION_PATCH = ${BUIL
 file(APPEND "${VERSION_HEADER}" "constexpr std::string_view Engine_VERSION = \"2025.12.${BUILD_NUMBER}\";\n")
 
 file(APPEND "${VERSION_HEADER}" "} // namespace SF::Engine\n")
+
