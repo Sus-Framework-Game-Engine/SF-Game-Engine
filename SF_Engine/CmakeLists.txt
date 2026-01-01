@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.1)
 
 project(SF_Engine LANGUAGES CXX)
 
@@ -175,4 +175,5 @@ if(EXISTS "${THIRD_PARTY_DLL_DIR}")
             COMMENT "Copying ${dll} to build directory"
         )
     endforeach()
+
 endif()
