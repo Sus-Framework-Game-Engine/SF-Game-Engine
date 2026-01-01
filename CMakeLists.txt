@@ -86,15 +86,6 @@ add_subdirectory(
     "${CMAKE_SOURCE_DIR}/SF_Engine"                    # SF_Engine source folder
     "${BASE_OUTPUT_DIR}/SF_Engine_Build"               # SF_Engine build folder (outside source!)
 )
-
-# --------------------------------------------------
-# Add SuperSymmetry - keep build artifacts out of source
-# --------------------------------------------------
-add_subdirectory(
-    "${CMAKE_SOURCE_DIR}/SuperSymmetry"                # SuperSymmetry source folder
-    "${BASE_OUTPUT_DIR}/SuperSymmetry_Build"           # SuperSymmetry build folder (outside source!)
-)
-
 # Path to the generated version header
 set(VERSION_HEADER "./SF_Engine/Engine/Version.hpp")
 
@@ -120,4 +111,5 @@ file(APPEND "${VERSION_HEADER}" "constexpr uint8_t Engine_VERSION_MAJOR = 2025;\
 file(APPEND "${VERSION_HEADER}" "constexpr uint8_t Engine_VERSION_MINOR = 12;\n")
 file(APPEND "${VERSION_HEADER}" "constexpr uint8_t Engine_VERSION_PATCH = ${BUILD_NUMBER};\n")
 file(APPEND "${VERSION_HEADER}" "constexpr std::string_view Engine_VERSION = \"2025.12.${BUILD_NUMBER}\";\n")
+
 file(APPEND "${VERSION_HEADER}" "} // namespace SF::Engine\n")
