@@ -1,5 +1,13 @@
 #pragma once
 
+// Macro Section
+#define MEMORY_BARRIER() asm volatile("" ::: "memory")
+#define PREFETCH(addr) asm volatile("prefetcht0 %0" ::"m"(*(const char *)(addr)))
+#define PREFETCHW(addr) asm volatile("prefetcht0 %0" ::"m"(*(char *)(addr)))
+#define PAUSE() asm volatile("pause")
+#define CPU_RELAX() asm volatile("rep nop" ::: "memory")
+#define NO_MANGLE __attribute__((visibility("default"))) extern "C"
+
 #include "Module.hpp"
 #include "Version.hpp" // If this is not found, run ```cmake .``` from root directory of this project.
 #include "Log/Log.hpp"
@@ -16,6 +24,14 @@
 #endif
 #ifdef minor
 #undef minor
+#endif
+
+// Because windows.h is a stinking pile of garbage
+#ifdef MAJOR
+#undef MAJOR
+#endif
+#ifdef MINOR
+#undef MINOR
 #endif
 
 namespace SF::Engine
