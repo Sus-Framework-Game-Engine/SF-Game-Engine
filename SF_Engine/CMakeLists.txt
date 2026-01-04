@@ -15,14 +15,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     endif()
 endif()
 
-# ------------------------------------------------------
-# Vulkan SDK
-# ------------------------------------------------------
-set(VULKAN_SDK "F:/VulkanSDK/1.4.321.1")
-set(CMAKE_PREFIX_PATH "${VULKAN_SDK}")
-
-link_directories("${VULKAN_SDK}/Lib")
-include_directories("${VULKAN_SDK}/Include")  # for #include <vulkan/vulkan.h>
+# I already copied them all -_
 find_package(Vulkan REQUIRED)
 
 # ------------------------------------------------------
@@ -177,3 +170,4 @@ if(EXISTS "${THIRD_PARTY_DLL_DIR}")
     endforeach()
 
 endif()
+
