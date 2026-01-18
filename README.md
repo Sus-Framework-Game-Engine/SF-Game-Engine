@@ -1,3 +1,25 @@
+## SUS FRAMEWORK "GAME ENGINE"
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![License][license-shield]][license-url]
+auncher written in Rust**
+
+<!-- LINKS -->
+[contributors-shield]: https://img.shields.io/github/contributors/Sus-Framework-Game-Engien/SF-Game-Engine.svg?style=for-the-badge
+[contributors-url]: https://github.com/Sus-Framework-Game-Engien/SF-Game-Engine/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Sus-Framework-Game-Engien/SF-Game-Engine.svg?style=for-the-badge
+[forks-url]: https://github.com/Sus-Framework-Game-Engien/SF-Game-Engine/network/members
+[stars-shield]: https://img.shields.io/github/stars/Sus-Framework-Game-Engien/SF-Game-Engine.svg?style=for-the-badge
+[stars-url]: https://github.com/Sus-Framework-Game-Engien/SF-Game-Engine/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Sus-Framework-Game-Engien/SF-Game-Engine.svg?style=for-the-badge
+[issues-url]: https://github.com/Sus-Framework-Game-Engien/SF-Game-Engine/issues
+[license-shield]: https://img.shields.io/github/license/Sus-Framework-Game-Engien/SF-Game-Engine.svg?style=for-the-badge
+[license-url]: https://github.com/Sus-Framework-Game-Engien/SF-Game-Engine/blob/master/LICENSE
+
+## Wiki
+
 # NOTE THAT THIS IS NOT COMPLETE.
 
 
