@@ -17,8 +17,6 @@
 [license-shield]: https://img.shields.io/github/license/Sus-Framework-Game-Engine/SF-Game-Engine.svg?style=for-the-badge
 [license-url]: https://github.com/Sus-Framework-Game-Engine/SF-Game-Engine/blob/master/LICENSE
 
-## Wiki
-
 # NOTE THAT THIS IS NOT COMPLETE.
 
 
