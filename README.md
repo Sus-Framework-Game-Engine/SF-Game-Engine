@@ -4,7 +4,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
-auncher written in Rust**
 
 <!-- LINKS -->
 [contributors-shield]: https://img.shields.io/github/contributors/Sus-Framework-Game-Engine/SF-Game-Engine.svg?style=for-the-badge
