@@ -23,7 +23,7 @@
 # Game-Engine
 "Abandon all hope, ye who debug here." - Me.
 
-This is the repository of the infamous "Suspicous Framework?" – an open-source, attrocious performance, and highly restrictive thing built on Vulkan.
+This is the repository of the infamous "Scuffed Framework Game Engine" –> an open-source, attrocious performance, and highly restrictive abomination built on Vulkan.
 
 What I am going for:
 - built from the Acid thing but added access to Vulkan 1.3+ features.
