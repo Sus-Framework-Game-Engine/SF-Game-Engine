@@ -34,4 +34,4 @@ What I am going for:
 - Horrible Documentatino: read what is there, do not complain.
 I will keep developing this until my expectations are met. And then I will fix everything and finally provide an editor.
 
-If your name is Declan Connoly, GO Bis(2-Cloroethyl) sulfide YOURSELF! 
+If your name is [REDACTED], GO Bis(2-Cloroethyl) sulfide YOURSELF! 
