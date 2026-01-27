@@ -39,7 +39,7 @@ What I am going for:
 - fully customizable rendering pipeline to enable deep control over like 2 aspects of the graphics rendering, including shaders, pipelines, and full screen effects.
 - not so nodular architecture because I am too lazy.
 - optimized for my PC because and my rtx 30 shitty I mean 50.
-- Horrible Documentatino: read what is there, do not complain.
+- Horrible Documentation: read what is there, do not complain.
 I will keep developing this until my expectations are met. And then I will fix everything and finally provide an editor.
 
 If your name is [REDACTED], GO Bis(2-Cloroethyl) sulfide YOURSELF! 
