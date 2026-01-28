@@ -13,7 +13,6 @@
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
-<!-- LINKS -->
 [contributors-shield]: https://img.shields.io/github/contributors/Sus-Framework-Game-Engine/SF-Game-Engine.svg?style=for-the-badge
 [contributors-url]: https://github.com/Sus-Framework-Game-Engine/SF-Game-Engine/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Sus-Framework-Game-Engine/SF-Game-Engine.svg?style=for-the-badge
@@ -25,7 +24,7 @@
 [license-shield]: https://img.shields.io/github/license/Sus-Framework-Game-Engine/SF-Game-Engine.svg?style=for-the-badge
 [license-url]: https://github.com/Sus-Framework-Game-Engine/SF-Game-Engine/blob/master/LICENSE
 
-# NOTE THAT THIS IS NOT COMPLETE.
+## NOTE THAT THIS IS NOT COMPLETE.
 
 
 # Game-Engine
@@ -39,6 +38,4 @@ This is the repository of the infamous "Scuffed Framework Game Engine" –> an o
 - Not so nodular architecture because I am too lazy.
 - Not optimized att all because I have a rtx 30 shitty I mean 50.
 - Horrible Documentation: read what is there, do not complain.
-I will keep developing this until my expectations are met. And then I will fix everything and finally provide an editor.
-
-If your name is [REDACTED], GO Bis(2-Cloroethyl) sulfide YOURSELF! 
+I will keep developing this until my expectations are met. And then I will fix everything... Maybe.
